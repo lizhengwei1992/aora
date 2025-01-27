@@ -3,10 +3,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "strict": false,
+    "jsx": "react-native",
+    "jsxImportSource": "nativewind",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     }
   },
   "include": [
