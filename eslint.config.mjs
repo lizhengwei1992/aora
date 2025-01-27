@@ -28,6 +28,7 @@ export default [
   eslintConfigPrettier,
   {
     rules: {
+      "react/react-in-jsx-scope": "off", // 关闭 react/react-in-jsx-scope 规则，
       "react/prop-types": "off", // 关闭 react/prop-types 规则
       "no-commonjs": "off", // 允许使用 CommonJS 语法
       "global-require": "off", // 允许在全局作用域中使用 require
