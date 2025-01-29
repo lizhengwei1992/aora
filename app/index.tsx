@@ -9,7 +9,7 @@ export default function Index() {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
-        <View className="w-full justify-start items-center h-full px-4">
+        <View className="w-full justify-start items-center min-h-[85vh] px-4">
           <Image
             source={images.logo}
             className="w-[130px] h-[84px]"
@@ -46,7 +46,7 @@ export default function Index() {
           />
         </View>
       </ScrollView>
-      <StatusBar backgroundColor="#161622" style="light" />
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 }
