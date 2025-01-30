@@ -1,10 +1,12 @@
-import { View, ScrollView, Text, Image } from "react-native";
+import { View, ScrollView, Text, Image, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import FormFiled from "../../components/FormFiled";
 import CustomButton from "@/components/CustomButton";
 import { useState } from "react";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { createUser } from "../../lib/appwrite";
+
 const SignUp = () => {
   const [form, setForm] = useState({
     username: "",
@@ -12,8 +14,21 @@ const SignUp = () => {
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const subm6it = () => {
-    console.log("submitted");
+  const subm6it = async () => {
+    if (!form.username || !form.email || !form.password) {
+      Alert.alert("Error", "Please fill in all the fields");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await createUser(form.email, form.password, form.username);
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -30,7 +45,7 @@ const SignUp = () => {
           </Text>
           <FormFiled
             title="username"
-            value={form.email}
+            value={form.username}
             placeholder="Enter your username"
             handleChangeText={(e) => setForm({ ...form, username: e })}
             otherStyles="mt-7"
