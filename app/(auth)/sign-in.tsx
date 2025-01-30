@@ -6,8 +6,11 @@ import CustomButton from "@/components/CustomButton";
 import { useState } from "react";
 import { Link, router } from "expo-router";
 import { signIn } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
+  const { setUser, setIsLogged } = useGlobalContext();
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -20,7 +23,8 @@ const SignIn = () => {
     setIsSubmitting(true);
     try {
       const result = await signIn(form.email, form.password);
-
+      setUser(result);
+      setIsLogged(true);
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
